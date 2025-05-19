@@ -136,7 +136,7 @@ export class FieldMetadataService extends TypeOrmQueryService<FieldMetadataEntit
         },
       });
 
-      if (!existingFieldMetadata) {
+      if (!isDefined(existingFieldMetadata)) {
         throw new FieldMetadataException(
           'Field does not exist',
           FieldMetadataExceptionCode.FIELD_METADATA_NOT_FOUND,
@@ -152,14 +152,14 @@ export class FieldMetadataService extends TypeOrmQueryService<FieldMetadataEntit
         order: {},
       });
 
-      if (!objectMetadata) {
+      if (!isDefined(objectMetadata)) {
         throw new FieldMetadataException(
           'Object metadata does not exist',
           FieldMetadataExceptionCode.OBJECT_METADATA_NOT_FOUND,
         );
       }
 
-      if (!objectMetadata.labelIdentifierFieldMetadataId) {
+      if (!isDefined(objectMetadata.labelIdentifierFieldMetadataId)) {
         throw new FieldMetadataException(
           'Label identifier field metadata id does not exist',
           FieldMetadataExceptionCode.LABEL_IDENTIFIER_FIELD_METADATA_ID_NOT_FOUND,
@@ -192,7 +192,7 @@ export class FieldMetadataService extends TypeOrmQueryService<FieldMetadataEntit
 
       if (fieldMetadataInput.options) {
         for (const option of fieldMetadataInput.options) {
-          if (!option.id) {
+          if (!isDefined(option.id)) {
             throw new FieldMetadataException(
               'Option id is required',
               FieldMetadataExceptionCode.INVALID_FIELD_INPUT,
